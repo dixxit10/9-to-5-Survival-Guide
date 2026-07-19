@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>牛馬職員進化論</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
   :root{
     --bg:#F7F7F5;
@@ -49,7 +49,8 @@
 
   .screen{ display:none; width:100%; height:100%; flex-direction:column; align-items:center; overflow-y:auto; padding:24px 20px; }
   .screen.active{ display:flex; }
-  button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; touch-action:manipulation; -webkit-user-select:none; user-select:none; -webkit-tap-highlight-color:transparent; }
+  html{ touch-action:manipulation; }
   .btn{ padding:11px 26px; border-radius:999px; border:1.5px solid var(--line); background:var(--panel); color:var(--ink); font-size:13px; font-weight:600; transition:all .15s ease; }
   .btn:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.08); }
   .btn.primary{ background:var(--cyan); border-color:var(--cyan); color:#fff; box-shadow:0 6px 18px rgba(79,168,209,.35); }
@@ -60,7 +61,7 @@
   .figure{ position:relative; width:56px; height:92px; transform-origin:50% 100%; transition:transform .3s ease; }
   .figure .head{ width:26px; height:26px; border-radius:50%; border:2.2px solid var(--line); background:var(--panel); margin:0 auto; display:flex; align-items:center; justify-content:center; }
   .figure .eyes{ font-size:8px; font-weight:700; color:var(--line); white-space:nowrap; }
-  .figure .torso{ width:2.2px; height:28px; background:var(--line); margin:2px auto 0; }
+  .figure .torso{ width:15px; height:28px; background:var(--line); margin:2px auto 0; }
   .figure .arms{ width:38px; height:2.2px; background:var(--line); margin:0 auto; }
   .figure .legs{ position:relative; width:26px; margin:0 auto; height:26px; }
   .figure .legs::before,.figure .legs::after{ content:""; position:absolute; top:0; width:2.2px; height:26px; background:var(--line); }
@@ -82,6 +83,42 @@
     -webkit-overflow-scrolling: touch; 
   }
   .carousel-container::-webkit-scrollbar { display: none; }
+
+  .swipe-hint{
+    font-size:11px;
+    color:var(--gray);
+    text-align:center;
+    letter-spacing:.5px;
+    margin-top:-14px;
+    margin-bottom:6px;
+    transition:opacity .3s ease;
+    animation:swipeHintMove 1.4s ease-in-out infinite;
+  }
+  .swipe-hint.hidden{ opacity:0; pointer-events:none; }
+  @keyframes swipeHintMove{
+    0%,100%{ opacity:.5; transform:translateX(0); }
+    50%{ opacity:1; transform:translateX(4px); }
+  }
+
+  .page-dots{
+    display:flex;
+    gap:7px;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:4px;
+  }
+  .page-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--gray-light);
+    transition:all .25s ease;
+  }
+  .page-dot.active{
+    background:var(--coral);
+    width:18px;
+    border-radius:4px;
+  }
   
   .roster{ 
     display: inline-flex; 
@@ -169,7 +206,7 @@
     position:absolute; width:22px; height:22px; border-radius:50%;
     background:var(--coral); border:2px solid #fff;
     box-shadow: 0 2px 8px rgba(255,122,96,0.4);
-    transition:left .25s ease, top .25s ease;
+    transition:left .4s ease, top .4s ease;
     z-index:10;
     display:flex; align-items:center; justify-content:center;
     font-size:8px; color:#fff; font-weight:800;
@@ -292,10 +329,13 @@
       <h1>[ 9-to-5 Survival Guide ]</h1>
     </div>
     
-    <div class="carousel-container">
+    <div class="carousel-container" id="carousel-container">
       <div class="roster" id="roster"></div>
     </div>
-    
+
+    <div class="swipe-hint" id="swipe-hint">← 左右滑動查看其他角色 →</div>
+    <div class="page-dots" id="page-dots"></div>
+
     <div class="unlock-row" id="unlock-row"></div>
   </div>
 
@@ -415,6 +455,32 @@ rosterData.forEach(r=>{
       e.stopPropagation();
       startGame();
     });
+  }
+});
+
+const carouselContainer = document.getElementById("carousel-container");
+const pageDots = document.getElementById("page-dots");
+const swipeHint = document.getElementById("swipe-hint");
+
+rosterData.forEach((r, i)=>{
+  const dot = document.createElement("div");
+  dot.className = "page-dot" + (i === 0 ? " active" : "");
+  pageDots.appendChild(dot);
+});
+
+function updateActiveDot(){
+  const idx = Math.round(carouselContainer.scrollLeft / carouselContainer.clientWidth);
+  document.querySelectorAll(".page-dot").forEach((d, i)=>{
+    d.classList.toggle("active", i === idx);
+  });
+}
+
+let swipeHintDismissed = false;
+carouselContainer.addEventListener("scroll", ()=>{
+  updateActiveDot();
+  if(!swipeHintDismissed){
+    swipeHintDismissed = true;
+    swipeHint.classList.add("hidden");
   }
 });
 
@@ -607,7 +673,7 @@ function moveTokenAlong(from, steps, onDone){
     
     placeTokenAt(cur);
     remaining--;
-    setTimeout(stepAnimation, 180);
+    setTimeout(stepAnimation, 450);
   }
   stepAnimation();
 }
@@ -1200,7 +1266,12 @@ function backToRosterSelect(){
   placeTokenAt(0, true);
   
   btnRoll.disabled = false;
-  
+
+  carouselContainer.scrollLeft = 0;
+  updateActiveDot();
+  swipeHintDismissed = false;
+  swipeHint.classList.remove("hidden");
+
   document.getElementById("screen-start").classList.add("active");
 }
 
