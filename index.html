@@ -71,49 +71,49 @@
   .figure .head{ position:absolute; top:0; left:50%; transform:translateX(-50%); width:26px; height:26px; border-radius:50%; border:2.2px solid var(--line); background:var(--panel); display:flex; align-items:center; justify-content:center; }
   .figure .eyes{ font-size:8px; font-weight:700; color:var(--line); white-space:nowrap; }
   .figure .torso{ position:absolute; top:28px; left:50%; transform:translateX(-50%); width:20px; height:28px; background:var(--line); }
-  .figure .arms{ position:absolute; top:34px; left:50%; transform:translateX(-50%); width:38px; height:2.2px; background:var(--line); }
+  .figure .arms{ position:absolute; top:28px; left:50%; transform:translateX(-50%); width:38px; height:2.2px; background:var(--line); }
   .figure .legs{ position:absolute; top:56px; left:50%; transform:translateX(-50%); width:26px; height:26px; }
   .figure .legs::before,.figure .legs::after{ content:""; position:absolute; top:0; width:2.2px; height:26px; background:var(--line); }
   .figure .legs::before{ left:5px; transform:rotate(10deg); transform-origin:top; }
   .figure .legs::after{ right:5px; transform:rotate(-10deg); transform-origin:top; }
   .figure.hunch{ transform:rotate(15deg) translateY(3px); }
-  .figure .label{ position:absolute; bottom:-20px; left:0; right:0; text-align:center; font-size:10.5px; color:var(--gray); font-weight:600; white-space:nowrap; }
+  .figure .label{ position:absolute; bottom:-15px; left:0; right:0; text-align:center; font-size:10.5px; color:var(--gray); font-weight:600; white-space:nowrap; }
 
-  /* 角色特徵：主管理職 - 金色 + 尖頂徽章 */
+  
   .figure.role-ceo .head{ border-color:var(--gold); }
   .figure.role-ceo .torso{ background:var(--gold); }
   .figure.role-ceo .head::before{ content:""; position:absolute; top:-9px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-bottom:8px solid var(--gold); }
 
-  /* 董事長親友 - 紫色 + 蝴蝶結 */
+  
   .figure.role-kin .head{ border-color:var(--plum); }
   .figure.role-kin .torso{ background:var(--plum); }
   .figure.role-kin .head::before{ content:""; position:absolute; top:-6px; right:-3px; width:9px; height:9px; background:var(--plum); border-radius:50% 50% 50% 0; transform:rotate(45deg); }
 
-  /* 管理幹部 - 深藍 + 眼鏡 */
+  
   .figure.role-mgr .head{ border-color:var(--navy); }
   .figure.role-mgr .torso{ background:var(--navy); }
   .figure.role-mgr .head::after{ content:""; position:absolute; top:9px; left:2px; right:2px; height:3px; background:var(--navy); border-radius:2px; }
 
-  /* 清潔人員 - 鼠尾草綠 + 鴨舌帽 */
+  
   .figure.role-jan .head{ border-color:var(--sage); }
   .figure.role-jan .torso{ background:var(--sage); }
   .figure.role-jan .head::before{ content:""; position:absolute; top:-7px; left:50%; transform:translateX(-50%); width:19px; height:9px; background:var(--sage); border-radius:9px 9px 0 0; }
 
-  /* 主角／牛馬職員 - 珊瑚色領口 */
+  
   .figure.role-slave .head{ border-color:var(--coral); }
   .figure.role-slave .torso{ background:var(--line); }
-  .figure.role-slave .head::after{ content:""; position:absolute; bottom:-3px; left:50%; transform:translateX(-50%); width:14px; height:3px; background:var(--coral); border-radius:2px; }
+  .figure.role-slave .head::after{ content:""; position:absolute; bottom:20px; left:50%; transform:translateX(-50%); width:20px; height:5px; background:var(--coral); border-radius:2px; }
 
-  /* 老鳥同事 - 磚紅色 */
+  
   .figure.role-senior .head{ border-color:var(--rust); }
   .figure.role-senior .torso{ background:var(--rust); }
 
-  /* 人資 - 紫羅蘭 + 耳環 */
+  
   .figure.role-hr .head{ border-color:var(--violet); }
   .figure.role-hr .torso{ background:var(--violet); }
   .figure.role-hr .head::before{ content:""; position:absolute; top:9px; left:-5px; width:4px; height:4px; border-radius:50%; background:var(--violet); box-shadow:23px 0 0 var(--violet); }
 
-  /* 隔壁PM - 橘色 + 耳機 */
+  
   .figure.role-pm .head{ border-color:var(--tangerine); }
   .figure.role-pm .torso{ background:var(--tangerine); }
   .figure.role-pm .head::after{ content:""; position:absolute; top:-2px; left:-3px; right:-3px; height:14px; border:2px solid var(--tangerine); border-bottom:none; border-radius:12px 12px 0 0; background:transparent; }
@@ -298,7 +298,7 @@
     border:1.5px solid var(--gray-light);
     border-radius:16px;
     padding:20px 18px;
-    display:flex; flex-direction:column; gap:12px;
+    display:flex; flex-direction:column; gap:20px;
     box-shadow:0 20px 40px rgba(0,0,0,.15);
   }
   .event-tag{ font-size:10px; letter-spacing:1px; color:var(--cyan-dark-real); font-weight:800; }
@@ -400,8 +400,8 @@
 
   <div id="screen-start" class="screen active">
     <div class="title-block">
-      <div class="eyebrow">Project</div>
-      <h1>[ Overtime Hero ]</h1>
+      <div class="eyebrow">Office/div>
+      <h1>[ Forever Carrot ]</h1>
     </div>
     
     <div class="carousel-container" id="carousel-container">
@@ -469,7 +469,7 @@
 let catchSpawnTimer = null;
 let catchLoopId = null;
 
-/* ---- 禁用雙擊/雙指快速點擊放大畫面 ---- */
+
 (function disableDoubleTapZoom(){
   let lastTouchEnd = 0;
   document.addEventListener("touchend", function(e){
@@ -481,13 +481,7 @@ let catchLoopId = null;
   document.addEventListener("gesturestart", function(e){ e.preventDefault(); }, { passive:false });
 })();
 
-/* ============================================================
-   雙語（中/英）架構
-   - currentLang 控制目前語言："zh" 或 "en"
-   - T(field)：傳入 {zh:"...", en:"..."} 物件，回傳目前語言的字串
-   - t(key)：從 UI_TEXT 字典依 key 取出目前語言的字串（含函式型模板）
-   - 所有標示 [EN] 開頭的英文內容都是佔位文字，請自行替換潤飾
-   ============================================================ */
+
 let currentLang = "zh";
 
 function T(field){
@@ -507,7 +501,7 @@ const UI_TEXT = {
   certTitle: { zh:"牛馬職員職位評定書", en:"Official Corporate Liability Report" },
   earlyTag: { zh:"職涯異常登出", en:"DUMPED BY HR" },
   completeTag: { zh:"榮譽職涯謝幕", en:"SURVIVED THE GRIND" },
-  creditsText: { zh:"感謝您完整體驗了牛馬職員的辦公室人生 ・ 感謝董事長、管理幹部、人資部門全體工作人員參與演出 ・ 感謝同事、PM、清潔人員友情客串 ・ 感謝幕後製作Joy & Andy ・ 特別感謝：您的青春、肝與精神值 ・ 本遊戲純屬虛構，如有雷同、歡迎對號入座 ・ THE END ・ 感謝收看", en:"Thanks for surviving the cubicle hell. Huge shoutout to the Management for their toxic performances. Special props to your youth, liver, and mental health. 100% Fictional, any similarity to your miserable boss is strictly intentional." },
+  creditsText: { zh:"感謝您完整體驗了牛馬職員的辦公室人生 ・ 感謝董事長、管理幹部、人資部門全體工作人員參與演出 ・ 感謝同事、PM、清潔人員友情客串 ・ 特別感謝：您的青春、肝與精神值 ・ 本遊戲純屬虛構，如有雷同、歡迎對號入座 ・ THE END ・ 感謝收看", en:"Thanks for surviving the cubicle hell. Huge shoutout to the Management for their toxic performances. Special props to your youth, liver, and mental health. 100% Fictional, any similarity to your miserable boss is strictly intentional." },
   reincarnateBtn: { zh:"重新投胎", en:"Reset Life" },
   shutdownBtn: { zh:"關閉電腦", en:"Shut Down" },
   shutdownMsg: { zh:"明天還是要準時打卡喔。", en:"See you bright and early. Don't be late." },
@@ -515,20 +509,20 @@ const UI_TEXT = {
   playerLabel: { zh:"牛馬職員", en:"Desk Drone" },
   cardHintBefore: { zh:"點擊翻開命運卡...", en:"Flip your fate..." },
   cardHintAfter: { zh:"命運已經翻開，覆水難收。", en:"No turning back now." },
-  catchTip: { zh:"提示：■ 藍色公文(得分) | ▲ 紅色垃圾(扣分)", en:"Tip: ■ Blue = Productivity | ▲ Red = Trash" },
+  catchTip: { zh:"■ 藍色公文(得分) | ▲ 紅色垃圾(扣分)", en:"■ Blue = Productivity | ▲ Red = Trash" },
   catchCaught: { zh:n=>`已接：${n} / 5`, en:n=>`Caught: ${n} / 5` },
   catchMissed: { zh:n=>`漏接：${n} / 3`, en:n=>`Missed: ${n} / 3` },
   catchFailTrash: { zh:"糟糕！接到了紅色的午餐垃圾，被主管迎頭痛罵！", en:"Yikes. You caught the trash. Boss is screaming." },
   catchFailDrop: { zh:"重要公文摔了一地，商業機密漏光了。", en:"Oops. Confidential data just hit the floor." },
-  catchSuccess: { zh:"【成功】效率爆棚！公文完美分類歸檔！", en:"[Success] Peak productivity achieved." },
+  catchSuccess: { zh:"效率爆棚！公文完美分類歸檔！", en:"Peak productivity achieved." },
   catchFailPrefix: { zh:"【失敗】", en:"[Fail]" },
   catchFailDefault: { zh:"業務疏失。", en:"Human error." },
   memHud: { zh:n=>`配對錯誤次數：${n} / 3`, en:n=>`Screw-ups: ${n} / 3` },
-  memSuccess: { zh:"【成功】神準記憶！三大客戶全部配對成功！", en:"[Success] Nailed it. Clients are happy." },
-  memFail: { zh:"【失敗】把 Gary 叫成 Terry...客戶震怒退件。", en:"[Fail] Called Gary \"Terry\"... Account lost." },
+  memSuccess: { zh:"神準記憶！三大客戶全部配對成功！", en:"Nailed it. Clients are happy." },
+  memFail: { zh:"把 Gary 叫成 Terry...客戶震怒退件。", en:"Called Gary \"Terry\"... Account lost." },
   teleReqPrefix: { zh:req=>`主管需求：「要一種 ${req} 的感覺。」`, en:req=>`Manager: Make it look more ${req}."` },
   teleSuccessPrefix: { zh:"【成功】", en:"[Nailed it]" },
-  teleFail: { zh:req=>`【失敗】主管怒斥：『我要的是${req}！這什麼垃圾？重做！』`, en:req=>`[Fail] The manager: "That’s not ${req}! Absolute garbage. Redo it."` },
+  teleFail: { zh:req=>`『我要的是${req}！這什麼垃圾？重做！』`, en:req=>`"That’s not ${req}! Absolute garbage. Redo it."` },
   revealBtn: { zh:"揭曉最終職位評定", en:"Reveal My Paygrade" },
   settleBtn: { zh:"繼續", en:"Continue" },
   retryBtn: { zh:"重來 (Retry)", en:"Retry" },
@@ -579,11 +573,11 @@ const roster = document.getElementById("roster");
 const unlockRow = document.getElementById("unlock-row");
 
 const rosterData = [
-  { id:"ceo", label:{zh:"董事長", en:"CEO"}, msg:{zh:"很抱歉，首抽投胎是門技術活，看來你上輩子沒練好。", en:"Sorry, life is a lottery. Looks like you didn't buy a winning ticket in your past life."}, ok:false },
+  { id:"ceo", label:{zh:"董事長", en:"CEO"}, msg:{zh:"首抽投胎是門技術活，看來你上輩子沒練好。", en:"Life is a lottery. Looks like you didn't buy a winning ticket in your past life."}, ok:false },
   { id:"kin", label:{zh:"董事長親友", en:"Kin"}, msg:{zh:"你跟董事長目前唯一的交集只有在同一個地球上，回去重選。", en:"You and the CEO share nothing but the same oxygen. Pick again."}, ok:false },
   { id:"mgr", label:{zh:"管理幹部", en:"Manager"}, msg:{zh:"你才剛入職就想一步登天? 還是去基層好好接受社會毒打吧。", en:"Nice try. Go get humbled in the trenches before you talk about a promotion."}, ok:false },
   { id:"slave", label:{zh:"牛馬職員", en:"Full-time Employee"}, msg:{zh:"", en:""}, ok:true },
-  { id:"jan", label:{zh:"清潔人員", en:"Junior"}, msg:{zh:"現在連掃地都要碩士學歷和3年工作經驗了，你資歷不夠。請重選。", en:"Entry-level position. Must have 5 years of experience, and the ability to teleport. You’re underqualified. Try again."}, ok:false },
+  { id:"jan", label:{zh:"清潔人員", en:"Junior"}, msg:{zh:"現在連掃地都要碩士學歷和3年工作經驗了，你資歷不夠。", en:"Entry-level position. Must have 5 years of experience and the ability to teleport. You’re underqualified."}, ok:false },
 ];
 
 function renderRoster(){
@@ -678,7 +672,7 @@ const PATH_COORDS = [
 ];
 
 const boardEl = document.getElementById("board");
-const OFFICE_FILLER_EMOJI = ["📎","🖊️","📅","💼","📊","🗂️","🖨️","🧾","📌","💻"];
+const OFFICE_FILLER_EMOJI = ["","💻","","☕️","","","🖨️","","","💰"];
 
 function renderBoard(){
   document.querySelectorAll(".cell").forEach(c=>c.remove());
