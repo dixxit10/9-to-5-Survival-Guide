@@ -163,7 +163,7 @@
 
   .unlock-row{ min-height:60px; display:flex; width:100%; align-items:center; justify-content:center; margin-top:10px; }
 
-  #screen-game{ justify-content:flex-start; padding:16px 12px; }
+  #screen-game{ justify-content:flex-start; padding:60px 12px; }
   .statusbar{ width:100%; display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:var(--panel); border-radius:14px; border:1px solid var(--gray-light); margin-bottom:16px; }
   .stat-label{ font-size:9px; letter-spacing:1px; color:var(--gray); font-weight:700; }
   .stat-value{ font-size:15px; font-weight:800; margin-top:2px; }
@@ -329,7 +329,7 @@
     border:1.3px solid var(--line);
     background:var(--panel);
     color:var(--ink);
-    font-size:11px;
+    font-size:14px;
     font-weight:700;
     letter-spacing:.5px;
     box-shadow:0 3px 8px rgba(0,0,0,.06);
@@ -454,7 +454,7 @@ const UI_TEXT = {
   catchFailDefault: { zh:"業務疏失。", en:"Human error." },
   memHud: { zh:n=>`配對錯誤次數：${n} / 3`, en:n=>`Screw-ups: ${n} / 3` },
   memSuccess: { zh:"【成功】神準記憶！三大客戶全部配對成功！", en:"[Success] Nailed it. Clients are happy." },
-  memFail: { zh:"【失敗】把 Gary 叫成 Terry...客戶震怒退件。", en:"[Failure] Called Gary \"Terry\"... Account lost." },
+  memFail: { zh:"【失敗】把 Gary 叫成 Terry...客戶震怒退件。", en:"[Fail] Called Gary \"Terry\"... Account lost." },
   teleReqPrefix: { zh:req=>`主管需求：「要一種 ${req} 的感覺。」`, en:req=>`Manager: Make it look more ${req}."` },
   teleSuccessPrefix: { zh:"【成功】", en:"[Nailed it]" },
   teleFail: { zh:req=>`【失敗】主管怒斥：『我要的是${req}！這什麼垃圾？重做！』`, en:req=>`[Fail] The manager: "That’s not ${req}! Absolute garbage. Redo it."` },
@@ -673,8 +673,8 @@ const CARD_POOL = [
     type: "card",
     tag: {zh:"無人角落 · 機會卡", en:"Empty Corner · Opportunity Card"},
     front: {zh:"你的KPI連續拿到 A+！總經理在週會上親自點名要提名你做小主管！", en:"Your KPIs are consistently A+! The GM personally names you for a promotion at the weekly meeting!"},
-    backLabel: {zh:"大環境不景氣 · 凍結升遷", en:"Economic Downturn · Promotions Frozen"},
-    backText: {zh:"下午公告：因全球通膨，凍結所有晉升名額。該職缺由董事長剛回國的兒子兼任。", en:"Announcement: due to global inflation, all promotions are frozen. The role goes to the CEO's son, who just returned from abroad."},
+    backLabel: {zh:"大環境不景氣 · 凍結升遷", en:"Economic Downturn"},
+    backText: {zh:"下午公告：因全球通膨，凍結所有晉升名額。該職缺由董事長剛回國的兒子兼任。", en:"Announcement: Promotions are frozen. The role has been claimed by the CEO's son, just back from his travels abroad."},
     effect: { salary: 0, mental: -2 }
   },
   { 
@@ -696,7 +696,7 @@ const GAME_POOL = [
 const FINAL_BOSS_EVENT = {
   type: "final",
   tag: {zh:"👑 董事長室", en:"👑 CEO's Office"},
-  text: {zh:"恭喜你撐過了 10 次命運考驗來到這裡！我看過你一路上資產與精神值的起伏了。現在，抬起頭來，我要親自決定你未來的職位！", en:"Congratulations on surviving 10 trials to get here! I've seen your salary and mental health rise and fall along the way. Now, look up — I will personally decide your future position!"}
+  text: {zh:"恭喜你撐過了 10 次命運考驗來到這裡！我看過你一路上資產與精神值的起伏了。現在，我要親自決定你未來的職位！", en:"Congratulations on surviving 10 trials to get here! I've seen your salary and mental health rise and fall along the way. Now, I will personally decide your future position!"}
 };
 
 let state = { salary:4500, mental:5, step:0, pos:0 };
@@ -1002,10 +1002,10 @@ function renderCatch(ev){
   function loop(){
     if(done) return;
     items.forEach(el=>{
-      let t = parseFloat(el.dataset.top) + 2.5;
-      el.dataset.top = t;
-      el.style.top = t+"px";
-      if(t > 120 && t < 145){
+      let yPos = parseFloat(el.dataset.top) + 2.5;
+      el.dataset.top = yPos;
+      el.style.top = yPos+"px";
+      if(yPos > 120 && yPos < 145){
         const itemX = parseFloat(el.style.left);
         if(itemX+16 > paddleX && itemX < paddleX+paddleW){
           el.dataset.hit = "1";
@@ -1020,7 +1020,7 @@ function renderCatch(ev){
           }
         }
       }
-      if(t > 160 && el.dataset.hit !== "1"){
+      if(yPos > 160 && el.dataset.hit !== "1"){
         el.dataset.hit = "1";
         if(el.dataset.trash === "0"){
           missed++;
