@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>牛馬職員進化論：隨機大富翁篇</title>
+<title>牛馬職員進化論</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   :root{
@@ -330,7 +330,7 @@
       <div class="ending-title" id="ending-title"></div>
       <div class="quote" id="ending-quote"></div>
       <div class="credits-marquee">
-        <span class="credits-track">感謝您完整體驗了牛馬職員的辦公室人生 ・ 感謝董事長、管理幹部、人資部門全體工作人員參與演出 ・ 感謝老鳥同事、隔壁PM、清潔人員友情客串 ・ 感謝命運卡與機會卡幕後製作團隊 ・ 特別感謝：您的青春、肝與精神值 ・ 本遊戲純屬虛構，如有雷同、歡迎對號入座 ・ THE END ・ 感謝收看</span>
+        <span class="credits-track">感謝您完整體驗了牛馬職員的辦公室人生 ・ 感謝董事長、管理幹部、人資部門全體工作人員參與演出 ・ 感謝老鳥同事、隔壁PM、清潔人員友情客串 ・ 感謝幕後製作Joy & Andy ・ 特別感謝：您的青春、肝與精神值 ・ 本遊戲純屬虛構，如有雷同、歡迎對號入座 ・ THE END ・ 感謝收看</span>
       </div>
       <div class="end-buttons">
         <button class="btn primary" id="btn-reincarnate">重新投胎 (Reincarnate)</button>
@@ -373,11 +373,11 @@ const roster = document.getElementById("roster");
 const unlockRow = document.getElementById("unlock-row");
 
 const rosterData = [
-  { id:"ceo", label:"董事長", msg:"很抱歉，首抽投胎是門技術活，看來你上輩子沒練好。這個坑不屬於你。", ok:false },
-  { id:"kin", label:"董事長親友", msg:"你跟董事長目前唯一的交集只有在同一個地球上。別硬蹭，回去重選。", ok:false },
+  { id:"ceo", label:"董事長", msg:"很抱歉，首抽投胎是門技術活，看來你上輩子沒練好。", ok:false },
+  { id:"kin", label:"董事長親友", msg:"你跟董事長目前唯一的交集只有在同一個地球上，回去重選。", ok:false },
   { id:"mgr", label:"管理幹部", msg:"你才剛入職就想一步登天? 還是去基層好好接受社會毒打吧。", ok:false },
   { id:"slave", label:"牛馬職員", msg:"", ok:true },
-  { id:"jan", label:"清潔人員", msg:"你打掃除沒人家乾淨，練好再來，此職缺不予錄用。", ok:false },
+  { id:"jan", label:"清潔人員", msg:"現在連掃地都要碩士學歷和3年工作經驗了，你資歷不夠。請重選。", ok:false },
 ];
 
 rosterData.forEach(r=>{
@@ -386,7 +386,7 @@ rosterData.forEach(r=>{
   outer.id = "card-" + r.id;
 
   const backContent = r.ok
-    ? `<div class="flip-msg">恭喜，這是你唯一能走的路。</div><button class="btn primary flip-enter-btn">進入公司 (Start Game)</button>`
+    ? `<div class="flip-msg">看來這是你唯一能走的路。</div><button class="btn primary flip-enter-btn">進入公司 (Start Game)</button>`
     : `<div class="flip-msg">${r.msg}</div>`;
 
   outer.innerHTML = `
@@ -458,7 +458,7 @@ renderBoard();
 const DIALOGUE_POOL = [
   {
     type: "dialogue", tag: "影印機格 · 奇葩對話", npc: "老鳥同事",
-    text: "小張啊，這疊報表幫我印一下並分類夾好，等等開會要用，謝謝啦！（正要光速閃人）",
+    text: "這疊報表幫我印一下並分類夾好，等等開會要用，謝謝啦！（正要光速閃人）",
     choices: [
       { text: "「交給我吧，包在我身上！」(展現積極度)", effect: { salary: 50, mental: -1 }, reply: "老鳥拍拍你的肩膀：「有前途！」但你犧牲了午休時間。" },
       { text: "「不好意思，我手上的企劃也很急...」(委婉拒絕)", effect: { salary: 0, mental: 0 }, reply: "老鳥嘖了一聲，一臉不悅地抱走文件。逃過一劫！" },
@@ -467,16 +467,16 @@ const DIALOGUE_POOL = [
   },
   {
     type: "dialogue", tag: "茶水間格 · 奇葩對話", npc: "人資（HR）",
-    text: "即日起公司為了體恤員工，全面實施高大上的『彈性上下班』制度喔！",
+    text: "即日起公司為了體恤員工，全面實施『彈性上下班』制度喔！",
     choices: [
-      { text: "「太棒了！終於可以睡飽再來了！」", effect: { salary: 0, mental: -1 }, reply: "隔天主管晚上11點密你：『既然是彈性工時，這份報告明早8點前給我。』" },
+      { text: "「太棒了！終於可以睡飽再來了！」", effect: { salary: 0, mental: -1 }, reply: "隔天主管晚上11點密你：『這份報告明早8點前給我。』" },
       { text: "「這代表下班時間也會『彈性延伸』吧...」(眼神死)", effect: { salary: 0, mental: -2 }, reply: "人資嘆口氣說你缺乏公司認同感。你的精神受到了預知性的重創。" },
       { text: "「我可以申請維持原本的固定工時嗎？」", effect: { salary: -100, mental: 1 }, reply: "被貼上『缺乏彈性與狼性』的標籤，但你守護了晚上的私人自由。" }
     ]
   },
   {
     type: "dialogue", tag: "走廊格 · 奇葩對話", npc: "隔壁 PM",
-    text: "這個跨部門專案進度大延期，完全是因為你們部門沒有及時交出數據，這報告你今天之內負責修好它！",
+    text: "這個專案進度大延期，完全是因為你們部門沒有及時交出數據，這報告你今天之內必須修好它！",
     choices: [
       { text: "「這是你們需求沒講清楚，不能全怪我們！」(據理力爭)", effect: { salary: -150, mental: -1 }, reply: "對方面紅耳赤地去 and 主管告狀，主管表示大局為重讓你吞下去。合約差點告吹，倒扣薪水。" },
       { text: "「好，我通知主管後立刻幫忙協助修正。」(吞下去)", effect: { salary: 100, mental: -2 }, reply: "專案被你爆肝救回來了！獲得了額外的加班津貼，但你的靈魂也黑了兩塊。" }
@@ -494,7 +494,7 @@ const CARD_POOL = [
   },
   { 
     type: "card", tag: "無人角落格 · 機會卡",
-    front: "你的KPI連續拿到 A+！總經理在週會上親自點名要提名你為全新課長！",
+    front: "你的KPI連續拿到 A+！總經理在週會上親自點名要提名你做小主管！",
     backLabel: "大環境不景氣 · 凍結升遷",
     backText: "下午公告：因全球通膨，凍結所有晉升名額。該職缺由董事長剛回國的兒子兼任。",
     effect: { salary: 0, mental: -2 }
@@ -503,7 +503,7 @@ const CARD_POOL = [
     type: "card", tag: "前台格子 · 機會卡",
     front: "同事們在座位區騷動，正在發起瘋狂午茶盲盒團購！還差一個人就免運費了，大家都轉頭看著你...",
     backLabel: "被強迫跟單",
-    backText: "為了辦公室和諧你只好跟著買了。你得到了一杯根本喝不懂的高級排毒苦澀綠色奶昔。",
+    backText: "為了辦公室和諧你只好跟著買了。你得到了一杯根本喝不懂的高級排毒綠奶昔。",
     effect: { salary: -150, mental: 0 }
   }
 ];
@@ -864,7 +864,7 @@ function renderCatch(ev){
     const res = document.createElement("div");
     res.className = "dialogue-box";
     res.style.textAlign = "center";
-    res.textContent = success ? "【成功】效率牛逼！公文完美分類歸檔！" : "【失敗】" + (msg || "業務疏失。");
+    res.textContent = success ? "【成功】效率爆棚！公文完美分類歸檔！" : "【失敗】" + (msg || "業務疏失。");
     eventCard.appendChild(res);
     
     addCatchGameActionButtons(ev, success ? { salary: 200 } : { salary: -200 });
@@ -1102,7 +1102,7 @@ function determineEnding(){
     return {
       isEarly: false,
       title: "終極資本主義祕密人物 (The Capitalism Mastermind)",
-      quote: "不可思議！你竟然在這種高壓環境下成功賺到大筆獎金、完美通過考驗！你成功拉高了全公司的內卷與加班標準，現在同事們都在背地裡恨透你了。你已經看透了公司的所有運作祕密，甚至獲得了總經理在週會上的親自提名。",
+      quote: "不可思議！你的產能與績效達到了完美境界。總經理在週會上公開提名你為『模範員工』並發放高額獎金。但當你提出升遷請求時，主管只是笑了笑說：『你的業務能力太不可取代了，公司需要你留在第一線，管理職不適合你。』你擁有了財富，但永遠失去了自由。",
       fig: "overtime"
     };
   }
@@ -1124,7 +1124,7 @@ function determineEnding(){
   
   if(state.mental <= 1){
     return { isEarly: false, title:"自動導航型社畜 (The Autopilot Drone)",
-      quote:"你在各種奇葩對話與折磨中耗盡了心智。你的精神已進化到靈魂肉體分離的最高境界。主管在前面口沫橫飛地罵你，你的大腦會自動切換成絕對靜音模式。",
+      quote:"你在各種奇葩對話與折磨中耗盡了心智。你的精神已進化到靈魂肉體分離的最高境界。主管在前面口沫橫飛地罵你，你的大腦會自動切換成靜音模式。",
       fig:"autopilot" };
   }
   
